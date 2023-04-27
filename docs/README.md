@@ -48,3 +48,23 @@ In addition, these libraries also offer a large number of customization options 
 
 Another benefit of using GUI libraries is that they often include clear documentation and code examples so that developers can easily learn how to use them. This speeds up the development process and helps developers resolve common issues quickly.
 
+## References
+[Definition](https://www.computerweekly.com/es/definicion/Interfaz-grafica-de-usuario-o-GUI#:~:text=Una%20GUI%20es%20una%20interfaz,puramente%20textual%20para%20una%20computadora)
+
+[Make a GUI](https://es.quora.com/C%C3%B3mo-puedo-hacer-una-GUI-en-C)
+
+[Tutorial FML](https://www.youtube.com/playlist?list=PL-EPeghw5sXg3t0egTspfHdUYMDqyOLwf)
+
+[GUI programs](https://www.quora.com/What-is-the-way-to-start-developing-GUI-programs-apps-in-C-for-PCs)
+
+[GUI Libraries](https://en.wikipedia.org/wiki/List_of_platform-independent_GUI_libraries)
+
+[SDL_GUI_API](https://github.com/ARahimKhan/SDL_GUI_API)
+
+[Definition Wiki](https://es.wikipedia.org/wiki/Interfaz_gr%C3%A1fica_de_usuario)
+
+[Origin](https://blogthinkbig.com/del-texto-a-las-ventanas-como-llegamos-a-la-interfaz-grafica-de-usuario)
+
+[Apple Lisa](https://es.wikipedia.org/wiki/Apple_Lisa)
+
+
