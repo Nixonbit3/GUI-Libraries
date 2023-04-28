@@ -48,6 +48,25 @@ In addition, these libraries also offer a large number of customization options 
 
 Another benefit of using GUI libraries is that they often include clear documentation and code examples so that developers can easily learn how to use them. This speeds up the development process and helps developers resolve common issues quickly.
 
+## TODOs
+The first thing to do is look for some libraries that we like, once we have it, we have to see if it is compatible with our project and if so, look at tutorials if they exist and start implementing it in our project.
+
+TODO 1: We create a folder called SDL_GUI with the same structure as the others.
+
+![image](https://user-images.githubusercontent.com/99950497/235032467-77fcfc01-bc8c-4e02-9eee-b3393bfc41cf.png)
+
+TODO 2: We put the #include in the main
+
+TODO 3: We fix the errors of the includes so that they access the corresponding folders and we add SDL_ttf if necessary.
+![image](https://user-images.githubusercontent.com/99950497/235032441-7d4a2ecd-af62-4eb8-970d-6163551e6ec6.png)
+
+TODO 4: We go to the project properties and fix the linker
+![image](https://user-images.githubusercontent.com/99950497/235032358-c0371798-f6f8-4925-88d8-4e18713b360e.png)
+
+
+## Conclusions
+My conclusions is that if we get a library that we can easily implement in our project, it is advisable to do so, since it would save us a lot of time. But with the project that we are doing, I think that SDL is enough, since the GUI libraries are very difficult to implement, since you have to know several languages, or know how to use the CMD of the PC. There can also be many bugs and for very large libraries, it is difficult to implement them in already started projects, that's why I recommend using the GUI libraries before starting the project.
+
 ## References
 [Definition](https://www.computerweekly.com/es/definicion/Interfaz-grafica-de-usuario-o-GUI#:~:text=Una%20GUI%20es%20una%20interfaz,puramente%20textual%20para%20una%20computadora)
 
