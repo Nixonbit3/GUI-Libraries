@@ -1,0 +1,154 @@
+		
+TUTORIAL:
+
+SDL_GUI_API v 0.61
+
+TO USE LIBRARY, #include "SDL_GUI.h"
+
+THROUGHOUT THE THING ONLY DYNAMICALLY ALLOCATE ELEMENTS
+THAT IS, USE GElement* element = new GElement( args... ) //rather than just making stack instances
+
+A FRAME IS ALSO AN ELEMENT SOMETIMES THEY ARE USED INTERCHANGEABLY
+IMPORTANT NOTES ARE GIVEN AT END. YOU HAVE TO READ THEM.
+YOU CAN ADD ELEMENTS IN FRAME. YOU CAN ADD ONLY FRAMES TO WINDOW. YOU ___CANNOT___ ADD WINDOW TO WINDOW OR WINDOW TO FRAME
+
+Elements provided:
+GButton
+GTextField
+GFrame
+GWindow
+GButtonGroup
+GLabel
+
+
+All elements are made by default as element_class(std::string ID, SDL_Renderer* renderer, SDL_Rect rect);
+ID SHOULD BE UNIQUE BECAUSE IT IS VERY IMPORTANT TO FIND ELEMENTS THAT ARE DYNAMICALLY ALLOCATED FOR EXAMPLE
+OR IF THE ELEMENTS ARE DEFINED IN ANOTHER FILE AND WE NEED ACCESS TO IT
+
+To get an element just call GElement* element_you_lost_the_name_but_know_id = any_element_pointer_name->GetParentWindow()->GetElementByID(std::string ID);
+			 or GElement* element_you_lost_the_name_but_know_id = any_higher_level_frame_or_window_this_belongs_to->GetElementByID(std::string ID);
+
+
+Common element attributes(present in all):
+
+SetScrollable(x, y) whether or not the element can be moved on scrolling
+			SET TRUE BY DEFAULT
+
+SetImage(int index, std::string image_path) index depends on the element
+			GButton/GTextField: index can be CLICKED_IMAGE, IDLE_IMAGE, HIGHLIGHT_IMAGE
+			GLabel: index can be BG_IMAGE
+			YOU DONT NEED TO USE THIS FOR NOW BECAUSE IMAGES ARE AUTOMATICALLY CREATED BY STYLESHEET
+
+Activate()                      //Activate / Deactivate and SetEnabled are different because Activate and Deactivate have associated attributes like PUSH_TO_TOP etc
+Deactivate()			// ALL YOU NEED TO KNOW IS DO NOT CALL SetEnabled only call Activate/Deactivate
+SetEnabled(bool state)
+SetEventsEnabled(bool state)
+
+SetText(std::string), GetText() only for button label textfield
+SetTextRect(SDL_Rect rect) only for textfield it tells where to place the text you entered. coordinated with respect to text field, not frame
+AttachStylesheet(Stylesheet* ) all the elements(including frames) belonging to a frame automatically get the parent frame stylesheet and frames get automatically from window
+	if you want different, set separately by calling element_instance->AlterStylesheet() and then modifying the values on the reference it returns
+SetAttributes(ELEMENT_ATTRIBUTES* ) attribute structure basically has properties like HIDE_ON_CLICKED_OUT, PUSH_TO_TOP_ON_CLICKED_IN, etc. by default they are already set.
+	only change if you want different attributes by calling AlterAttributes() otherwise dont
+
+OTHER FUNCTIONS:
+
+SetFunction_click_left(Functor* func);
+SetFunction_click_right(Functor* func);
+SetFunction_key_enter(Functor* func);
+SetFunction_motion(Functor* func);
+Scroll(Direction dirn, int amount);      Direction can be DIRECTION_X or DIRECTION_Y
+Move(int amt_x, int amt_y);
+
+Activate();
+Deactivate();     Basically they enable/disable events for an element or frame. if HIDE_ON_DEACTIVATE and/or PUSH_TO_TOP_ON_ACTIVATE is specified as true in element_attributes
+			then they do that action also
+
+
+Special Attributes:
+
+Frame:
+
+AddElement(Element*)
+AddBackground(BackgroundImage*)
+SetContainingScrollable(bool along_x, bool along_y)    basically whether we can scroll elements that are there inside frame or not
+
+
+Window:
+
+AddLayer(Frame*)
+SetActiveLayer(Frame*)      Please only call this after attaching all frames
+SetState(bool)              This starts the window
+
+
+ButtonGroup: this takes an additional constructor argument as Direction. Just give DIRECTION_X or DIRECTION_Y
+
+AddButton(std::string ID, std::string text)  returns a reference to created button. text is the text you want on the button. if you want to change more properties, just use this returned value
+posn can be POSITION_X or POSITION_Y depending on where you wanna place the new button. Try not to mix different positions on same button group.Changes are there to be
+made still so stick with this.
+
+STYLESHEETS:
+
+colors : background, foreground, neutral, accent
+how to define a color : SDL_Color color = {red_val, blue_val, green_val, transparency_val}; //All 8 bit i.e., 0-255 only
+ELEMENT_ATTRIBUTES* default_attributes    if you want to change then call SetAttributes( attr ) after attaching stylesheet
+font_data* font   this is a structure that has face and color(same declaration type as above)
+	
+MAKING A FONT FACE:
+Download a .ttf file
+Call TTF_Font* font = TTF_OpenFont(filepath(should be in project directory), size); //this font can be attached to font_data.face
+
+
+YOU DONT NEED TO USE THIS NOW. NOW JUST USE BASIC FUNCTIONS
+FUNCTORS:
+Functors are objects where the call operator i.e., "()" is overloaded so that the instance itself can be called
+If you want to make a functor to attach in a button, just make some function class inherit from the Functor class and override the operator()() method already
+	defined in base class Functor.
+
+
+ELEMENT_ATTRIBUTES:
+
+	A set of bools that define what action to take given some other action happened.
+	To set attributes just call element_name->SetAttributes(attributes_instance)
+	Read the ELEMENT_ATTRIBUTES.h file. They are pretty self explanatory check the header file.
+
+OKAY, OKAY, IMPORTANT NOTES:
+
+	Elements in frames are very dependent on order they are added in. So, an element that was added first will appear below an element added later
+	This ordering remains same unless the ELEMENT_ATTRIBUTES TELL IT TO SHIFT IT UPWARDS OR DOWNWARDS
+	Not same for Window. Window is chill.
+
+	FUNCTIONS THAT I DID NOT LIST MIGHT CAUSE MEMORY LEAKS BECAUSE THEY ARENT TESTED YET.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
